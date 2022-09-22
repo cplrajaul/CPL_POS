@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CPL_POS.Models.Category>
+
+<table class="table table-bordered table-striped table-active">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th>
+                <a onclick="ShowInPopup('@Url.Action("AddOrEdit","Category",null,Context.Request.Scheme)', ' New Category ')" class="btn btn-success text-white">Create New Category</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedBy)
+                </td>
+                <td>
+
+                    <a onclick="ShowInPopup('@Url.Action("AddOrEdit","Category",new { id=item.CategoryId},Context.Request.Scheme)', 'Update Category')" class="btn btn-info">Edit</a>
+
+                    <form asp-action="Delete" asp-route-id="@item.CategoryId" onsubmit="return JQueryAjaxDelete(this)" class="d-inline">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

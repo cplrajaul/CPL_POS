@@ -1,0 +1,55 @@
+﻿
+@model IEnumerable<CPL_POS.Models.Brand>
+
+
+<table class="table table-bordered table-striped table-active">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandLogo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+             <th> 
+                <a onclick="ShowInPopup('@Url.Action("AddOrEdit","Brand",null,Context.Request.Scheme)', ' New Brand ')" class="btn btn-success text-white">Create New Brand</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+             <td>
+                    <a asp-action="Details" asp-route-id="@item.BrandId">
+                        <img src="@FileLocation.RetriveFileFromFolder@item.BrandLogo" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                    </a>
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                    
+                        <a onclick="ShowInPopup('@Url.Action("AddOrEdit","Brand",new { id=item.BrandId},Context.Request.Scheme)', 'Update Brand')" class="btn btn-info">Edit</a>
+
+                        <form asp-action="Delete" asp-route-id="@item.BrandId" onsubmit="return JQueryAjaxDelete(this)" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                  
+
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,76 @@
+﻿@model CPL_POS.Models.SubCategory
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+    Layout=null;
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.SubCategoryId" onsubmit="return JQueryAjaxPost(this);" autocomplete="off"  enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <input type="hidden" asp-for="SubCategoryId" class="form-control"  />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SubCategoryName" class="control-label"></label>
+                        <input asp-for="SubCategoryName" class="form-control" />
+                        <span asp-validation-for="SubCategoryName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CreatedOn" class="control-label"></label>
+                        <input asp-for="CreatedOn" class="form-control" />
+                        <span asp-validation-for="CreatedOn" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+             <div class="row">
+             
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+             
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ModifiedBy" class="control-label"></label>
+                        <input asp-for="ModifiedBy" class="form-control" />
+                        <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+           
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+// Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

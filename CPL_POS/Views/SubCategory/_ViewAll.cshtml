@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CPL_POS.Models.SubCategory>
+
+<table class="table table-bordered table-striped table-warning">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th>
+                <a onclick="ShowInPopup('@Url.Action("AddOrEdit","SubCategory",null,Context.Request.Scheme)', ' New SubCategory ')" class="btn btn-success text-white">Create New SubCategory</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedBy)
+                </td>
+                <td>
+
+                    <a onclick="ShowInPopup('@Url.Action("AddOrEdit","SubCategory",new { id=item.SubCategoryId},Context.Request.Scheme)', 'Update SubCategory')" class="btn btn-info">Edit</a>
+
+                    <form asp-action="Delete" asp-route-id="@item.SubCategoryId" onsubmit="return JQueryAjaxDelete(this)" class="d-inline">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

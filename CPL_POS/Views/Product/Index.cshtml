@@ -1,0 +1,88 @@
+﻿@model IEnumerable<CPL_POS.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center text-uppercase">list of products</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary rounded-0"><i class="fa fa-plus-circle"></i> Add New</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brands)
+            </th>
+              <th>
+                @Html.DisplayNameFor(model => model.PhotoPath)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategory.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brands.BrandName)
+            </td>
+             <td>
+                <a asp-action="Details" asp-route-id="@item.ProductId">
+                    <img src="@FileLocation.RetriveFileFromFolder@item.PhotoPath" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                    @*<img src="~/Uploads/@item.PhotoPath class="img-thumbnail" height="100" width="100" asp-append-version="true" />*@
+                </a>
+            </td>
+              <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-info rounded-0"><i class="fa fa-pencil-alt"></i>Edit</a>
+                <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-sm btn-warning rounded-0"><i class="fa fa-pencil-alt"></i>Details</a>
+                <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-danger rounded-0"><i class="fa fa-trash-alt"></i>Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
